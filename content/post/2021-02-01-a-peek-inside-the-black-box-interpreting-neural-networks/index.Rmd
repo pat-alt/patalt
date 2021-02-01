@@ -19,9 +19,7 @@ Propelled by advancements in modern computer technology, deep learning has re-em
 
 In science, research questions usually demand not just answers but also explanations and variable selection is often as important as prediction [@ish2019interpreting]. Economists, for example, recognise the undeniable potential of deep learning, but are rightly hesitant to employ novel tools that are not fully transparent and ultimately cannot be trusted. Similarly, real-world applications of AI have come under increasing scrutiny with regulators imposing that individuals influenced by algorithms should have the right to obtain explanations [@fan2020interpretability]. In high-risk decision-making fields such as AI systems that drive autonomous vehicles the need for explanations is self-evident [@ish2019interpreting].
 
-In light of these challenges it is not surprising that research on explainable AI has recently gained considerable momentum [@arrieta2020explainable]. While in this short essay we will focus on deep learning in particular, it should be noted that this growing body of literature is concerned with a broader realm of machine learning models. The rest of this note is structured as follows: section \@ref(interpretable-dl) provides a brief overview of recent advancements towards interpreting deep neural networks largely drawing on @fan2020interpretability; section \@ref(rate) considers a novel entropy-based approach towards interpretability proposed by @crawford2019variable; finally, in section \@ref(interpreting-bnns) we will see how this approach can be applied to deep neural networks as proposed in @ish2019interpreting.
-
-<!-- ![Rise in scientific research on explainable AI. Source: @arrieta2020explainable](www/arrieta_explainability.png){#fig:ai-research width="500"} -->
+In light of these challenges it is not surprising that research on explainable AI has recently gained considerable momentum [@arrieta2020explainable]. While in this short essay we will focus on deep learning in particular, it should be noted that this growing body of literature is concerned with a broader realm of machine learning models. The rest of this note is structured as follows: the first section provides a brief overview of recent advancements towards interpreting deep neural networks largely drawing on @fan2020interpretability; the second section considers a novel entropy-based approach towards interpretability proposed by @crawford2019variable; finally, in the last section we will see how this approach can be applied to deep neural networks as proposed in @ish2019interpreting.
 
 # Interpretable DL - a whistle-stop tour {#interpretable-dl}
 
@@ -128,7 +126,7 @@ where $\sigma(.)$ is a link function and $\mathbf{u}(\mathbf{X})$ represents the
 
 <!-- ![An MLP with a single, deterministic hidden layer and probabilistic outer layer.](www/bnn.png){#fig:bnn width="500"} -->
 
-Having established this basic, flexible set-up the @ish2019interpreting go on to derive closed-form expressions for RATE in this setting. The details are omitted here since the logic is largely analogous to what we learned in section \@ref(rate), but can be found in @ish2019interpreting.
+Having established this basic, flexible set-up the @ish2019interpreting go on to derive closed-form expressions for RATE in this setting. The details are omitted here since the logic is largely analogous to what we learned above, but can be found in @ish2019interpreting.
 
 # Conclusion
 
