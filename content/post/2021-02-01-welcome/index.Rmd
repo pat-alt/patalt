@@ -1,0 +1,10 @@
+---
+title: Welcome
+author: Patrick Altmeyer
+date: '2021-02-01'
+slug: welcome
+categories: []
+tags: []
+---
+
+Welcome to my website.

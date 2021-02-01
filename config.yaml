@@ -1,0 +1,43 @@
+baseurl: /
+languageCode: en-us
+title: Patrick Altmeyer
+theme: "hugo-theme-m10c"
+publishDir: "pat-alt.github.io"
+googleAnalytics: ''
+disqusShortname: ''
+ignoreFiles:
+  - \.Rmd$
+  - \.Rmarkdown$
+  - _cache$
+  - \.knit\.md$
+  - \.utf8\.md$
+permalinks:
+  post: /:year/:month/:day/:slug/
+menu:
+  main:
+    - name: About
+      url: /about/
+    - name: GitHub
+      url: https://github.com/pat-alt
+    - name: LinkedIn
+      url: https://www.linkedin.com/in/patrick-altmeyer-a2a25494/
+    - name: CV
+      url: /resume
+params:
+  MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
+  MathJaxVersion: 2.7.5
+  description: A collection of ideas, notes and code.
+  avatar: avatar.png
+  menu_item_separator: "-"
+  favicon: favicon.ico
+  highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
+  highlightjsLang:
+    - r
+    - yaml
+  highlightjsTheme: github
+  highlightjsVersion: 9.12.0
+  logo:
+    alt: Logo
+    height: 50
+    url: avatar.jpg
+    width: 50
