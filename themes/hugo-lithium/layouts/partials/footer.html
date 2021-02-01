@@ -2,6 +2,10 @@
         {{ if .IsPage }}
           {{ template "_internal/disqus.html" . }}
         {{ end }}
+        {{ with .Site.Params.footer }}
+        <hr/>
+        {{ . | markdownify }}
+        {{ end }}
       </footer>
     </div>
     {{ partial "footer_highlightjs" . }}

@@ -6,6 +6,7 @@ output:
   bookdown::html_document2: default
 bibliography: ../../../bib.bib
 link-citations: true
+categories: [Deep Learning, Interpretable AI]
 ---
 
 ```{r setup, include=FALSE}

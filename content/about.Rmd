@@ -2,6 +2,7 @@
 title: "About"
 output: github_document
 date: "format(Sys.Date(), '%d %B, %Y')"
+disable_comments: true
 ---
 
 ```{r setup, include=FALSE}

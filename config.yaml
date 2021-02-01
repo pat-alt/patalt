@@ -19,10 +19,10 @@ menu:
       url: /about/
     - name: Blog
       url: /
-    - name: GitHub
-      url: https://github.com/pat-alt
     - name: CV
       url: /resume
+    - name: Categories
+      url: /categories/
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
@@ -41,3 +41,4 @@ params:
     height: 50
     url: avatar.png
     width: 50
+  footer: "&copy; [Patrick Altmeyer](https://pat-alt.github.io/) 2021- | [Github](https://github.com/pat-alt) | [LinkedIn](https://www.linkedin.com/in/patrick-altmeyer-a2a25494/)"
