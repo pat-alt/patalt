@@ -7,4 +7,8 @@ categories: []
 tags: []
 ---
 
-Welcome to my website.
+Welcome to my website! 
+
+Having worked with R Markdown and some of [Yihui Xie](https://yihui.org/)'s amazing packages for years, I have only now come across his amazing [blogdown](https://bookdown.org/yihui/blogdown/) package. For a while I have been thinking about a good way to share some of my work and actually started collecting snippets in a [Gitbook](https://pat-alt.github.io/fromScratch/) through [bookdown](https://bookdown.org/yihui/bookdown/) quite some time ago. While the book is a work-in-progress that I aim to finish at eventually, this blog is where I aim to regularly share content related to my work as a data scientist and economist. 
+
+

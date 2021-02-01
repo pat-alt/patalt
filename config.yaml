@@ -1,10 +1,10 @@
-baseurl: /
+baseurl: https://pat-alt.github.io/
 languageCode: en-us
 title: Patrick Altmeyer
-theme: "hugo-theme-m10c"
+theme: "hugo-lithium"
 publishDir: "pat-alt.github.io"
 googleAnalytics: ''
-disqusShortname: ''
+disqusShortname: 'patrickaltmeyer'
 ignoreFiles:
   - \.Rmd$
   - \.Rmarkdown$
@@ -17,10 +17,10 @@ menu:
   main:
     - name: About
       url: /about/
+    - name: Blog
+      url: /
     - name: GitHub
       url: https://github.com/pat-alt
-    - name: LinkedIn
-      url: https://www.linkedin.com/in/patrick-altmeyer-a2a25494/
     - name: CV
       url: /resume
 params:
@@ -39,5 +39,5 @@ params:
   logo:
     alt: Logo
     height: 50
-    url: avatar.jpg
+    url: avatar.png
     width: 50

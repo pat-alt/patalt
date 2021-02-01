@@ -1,0 +1,14 @@
+---
+title: "About"
+output: github_document
+date: "format(Sys.Date(), '%d %B, %Y')"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+*Economist with a knack for computer, data and decision science. Curious about hybrid intelligence, responsible AI, Bayesian statistics and behavioural and life sciences. *
+
+
+
