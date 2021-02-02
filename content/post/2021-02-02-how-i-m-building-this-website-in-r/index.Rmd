@@ -60,7 +60,7 @@ where the first argument is just the title of your post and the `ext` argument c
         └── header-attrs.js
 ```
 
-## A coding simple example
+## A simple coding example
 
 As you can probably tell from the code chunks above this post was created just in the way I described. So I thought I might as well go ahead with a simple coding example to add some flavour. Suppose you have built some function that you think is worth sharing with the world or simply learned something new and interesting. As a case in point, I recently had a look at the `Rcpp` package and wrote a small program in C++ to be used in R. Since R Markdown supports `Rcpp` code chunks (along with Python, bash, SQL, ...) it is straight-forward to show-case that code on this website. 
 
