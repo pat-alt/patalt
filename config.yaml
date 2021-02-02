@@ -29,7 +29,7 @@ params:
   description: A collection of ideas, notes and code.
   avatar: avatar.png
   menu_item_separator: "-"
-  favicon: logo.png
+  favicon: logo_icon.ico
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
   highlightjsLang:
     - r
