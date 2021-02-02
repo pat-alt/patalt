@@ -29,7 +29,7 @@ params:
   description: A collection of ideas, notes and code.
   avatar: avatar.png
   menu_item_separator: "-"
-  favicon: favicon.ico
+  favicon: logo.png
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
   highlightjsLang:
     - r
@@ -39,6 +39,6 @@ params:
   logo:
     alt: Logo
     height: 50
-    url: avatar.png
+    url: logo.png
     width: 50
   footer: "&copy; [Patrick Altmeyer](https://pat-alt.github.io/) 2021- | [Github](https://github.com/pat-alt) | [LinkedIn](https://www.linkedin.com/in/patrick-altmeyer-a2a25494/)"
