@@ -11,7 +11,7 @@ It turns out building a static website in R is remarkably easy, as long as you k
 
 ## Getting started
 
-To get started just follow the instructions on `blogdown`'s [Github repository](https://github.com/rstudio/blogdown) or keep reading here for a high-level overview. Setting up a basic website in R requires exactly two steps:
+To get started just follow the instructions on `blogdown`'s [GitHub repository](https://github.com/rstudio/blogdown) or keep reading here for a high-level overview. Setting up a basic website in R requires exactly two steps:
 
 1. Set up a local directory for the website. Let's suppose you create it here `~/Documents/myAwesomeWebsite`.
 
@@ -120,4 +120,4 @@ If you have some existing work that you would like to share you can just use it 
 
 ## Resources
 
-For more information about `blogdown` see [here](https://bookdown.org/yihui/blogdown/). To inspect the code that builds this website check out my [Github repository](https://github.com/pat-alt/patalt).
+For more information about `blogdown` see [here](https://bookdown.org/yihui/blogdown/). To inspect the code that builds this website check out my [GitHub repository](https://github.com/pat-alt/patalt).

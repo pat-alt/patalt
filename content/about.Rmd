@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 I am an economist by background with a strong interest in cross-disciplinary research on the intersection of interpretable artificial intelligence (AI) and financial economics. Currently I am studying for the MSc Data Science at the Barcelona Graduate School of Economics. I am also affiliated with the Bank of England where I previously worked as an economist mainly focused on monetary policy briefings, research and market intelligence. On this website I collect interesting pieces of work I produce along the way and anything else I feel worth sharing.
 
-To inspect the code that builds this website check out my [Github repository](https://github.com/pat-alt/patalt). If you would like to reach out to me, you can use any of the below:
+To inspect the code that builds this website check out my [GitHub repository](https://github.com/pat-alt/patalt). If you would like to reach out to me, you can use any of the below:
 
 ## Contact Info {#contact}
 
