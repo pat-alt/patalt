@@ -38,7 +38,7 @@ The remainder of this note focuses on a novel approach to feature extraction tha
 
 # An entropy-based approach to variable importance {#rate}
 
-[@ish2019interpreting] motivate their methodology for interpreting neural networks through Gaussian Process regression. Consider the following Bayesian regression model with Gaussian priors:
+@ish2019interpreting motivate their methodology for interpreting neural networks through Gaussian Process regression. Consider the following Bayesian regression model with Gaussian priors:
 
 ```{=tex}
 \begin{equation}
