@@ -118,4 +118,4 @@ If you have some existing work that you would like to share you can just use it 
 
 ## Resources
 
-For more information about `blogdown` see [here](https://bookdown.org/yihui/blogdown/). To inspect the code that builds this website check out my Github repository.
+For more information about `blogdown` see [here](https://bookdown.org/yihui/blogdown/). To inspect the code that builds this website check out my [Github repository](https://github.com/pat-alt/patalt).
