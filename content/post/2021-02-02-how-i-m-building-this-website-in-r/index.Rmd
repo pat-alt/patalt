@@ -17,7 +17,7 @@ To get started just follow the instructions on `blogdown`'s [Github repository](
 
 2. In R, navigate to the directory and simply run `blogdown::newsite()`.
 
-This will set up a basic template which you can develop. Changing the theme and playing with the basic structure of the website is relatively straight-forward. Personally I have so far managed to work things out based on a working knowledge of HTML and CSS that I've developed through the development of R Shiny apps.
+This will set up a basic template which you can develop. Changing the theme and playing with the basic structure of the website is relatively straight-forward. Personally I have so far managed to work things out based on a working knowledge of HTML and CSS that I've developed in the past through my work with R Shiny.
 
 ## Deploying your website
 
@@ -44,13 +44,13 @@ After adding `publishDir: pat-alt.github.io` to my `config.yaml` and then runnin
 
 ## Why all the trouble?
 
-There are certainly easier ways to build a website. But if like me you do pretty much all your work in R Markdown and want to share some of it, then you will love `blogown`. The beauty of it is that once the basic infrastructure is set up, adding content is as simple as running the following wrapper function
+There are certainly easier ways to build a website. But if like me you do pretty much all your work in R Markdown and want to share some of it, then you will love `blogdown`. The beauty of it is that once the basic infrastructure is set up, adding content is as simple as running the following wrapper function
 
 ```{r, eval=FALSE}
 blogdown::new_post("Your new post", ext = ".Rmd")
 ```
 
-where the first argument is just the title of you post and the `ext` argument can be used to specify that you want to create an R Markdown document that can include code chucks. The wrapper function will automatically set up a directory for your post under `/post/` and R Studio will redirect you to the relevant `.Rmd` file that you can fill with content. By default that folder will look like this:
+where the first argument is just the title of your post and the `ext` argument can be used to specify that you want to create an R Markdown document that can include code chucks. The wrapper function will automatically set up a directory for your post under `/post/`. R Studio will redirect you to the relevant `.Rmd` file that you can then fill with content. By default that folder will look roughly like this:
 
 ```
 ├── index.Rmd
@@ -62,7 +62,9 @@ where the first argument is just the title of you post and the `ext` argument ca
 
 ## A coding simple example
 
-As you can probably tell from the code chunks above this post was created just like that, so I might as well go ahead with a simple coding example to add some flavour. Suppose you have built some function that you think is worth sharing with the world or simply learned something new and interesting. As a case in point, I recently had a look at the `Rcpp` package and wrote a small program in C++ to be used in R. Since R Markdown supports `Rcpp` code chunks (along with Python, bash, SQL, ...) it is straight-forward to show-case that code on here. The program can be used to simulate data from a categorical distribution. This distribution describes the possible results of a random variable that can take on one of $K$ possible categories with different probabilities. In base R we could use `rmultinom(n=1000,1,p=c(0.5,0.1,0.4))` to simulate draws from one such distribution with three different categories. Alternatively, we could write the program in C++ as follows:
+As you can probably tell from the code chunks above this post was created just in the way I described. So I thought I might as well go ahead with a simple coding example to add some flavour. Suppose you have built some function that you think is worth sharing with the world or simply learned something new and interesting. As a case in point, I recently had a look at the `Rcpp` package and wrote a small program in C++ to be used in R. Since R Markdown supports `Rcpp` code chunks (along with Python, bash, SQL, ...) it is straight-forward to show-case that code on this website. 
+
+The program can be used to simulate data from a categorical distribution. This distribution describes the possible results of a random variable that can take on one of $K$ possible categories with different probabilities. In base R we could use `rmultinom(n=1000,1,p=c(0.5,0.1,0.4))` to simulate draws from one such distribution with three different categories. Alternatively, we could write the program in C++ as follows:
 
 ```{Rcpp}
 #include <Rcpp.h>
@@ -114,7 +116,7 @@ autoplot(mb)
 
 ## Embedding existing work
 
-If you have some existing work that you would like to share you can just use it to overwrite the `index.Rmd` file. `blogdown` supports any kind of R Markdown documents so you can use all your favourite markdown packages (`bookdown`, `pagedown`, ...). Just make sure to specify HTML output in the YAML header.
+If you have some existing work that you would like to share you can just use it to overwrite the `index.Rmd` file. `blogdown` supports any kind of R Markdown documents so you can use all of your favourite markdown packages (`bookdown`, `pagedown`, ...). Just make sure to specify HTML output in the YAML header.
 
 ## Resources
 
