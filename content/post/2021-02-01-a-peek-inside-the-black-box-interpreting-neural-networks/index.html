@@ -1,9 +1,10 @@
 ---
 title: "A peek inside the 'Black Box' - interpreting neural networks"
 author: "Patrick Altmeyer"
-date: "2021-02-02"
-output: 
-  bookdown::html_document2: default
+date: "2021-02-07"
+output:
+  blogdown::html_page:
+      toc: true
 bibliography: ../../../bib.bib
 link-citations: true
 categories: [Data Science]
@@ -12,6 +13,16 @@ tags: [deeplearning, interpretableai, neuralnets, bayes]
 
 <script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
 
+<div id="TOC">
+<ul>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#interpretable-dl">Interpretable DL - a whistle-stop tour</a></li>
+<li><a href="#rate">An entropy-based approach to variable importance</a></li>
+<li><a href="#interpreting-bnns">Application to Bayesian neural networks</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
 
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>

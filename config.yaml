@@ -4,7 +4,8 @@ title: Patrick Altmeyer
 theme: "hugo-lithium"
 publishDir: "pat-alt.github.io"
 googleAnalytics: ''
-disqusShortname: 'patrickaltmeyer'
+disqusShortname: 'patalt'
+relativeurls: false
 ignoreFiles:
   - \.Rmd$
   - \.Rmarkdown$
@@ -34,9 +35,8 @@ params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
   description: A collection of ideas, notes and code.
-  avatar: avatar.png
   menu_item_separator: "-"
-  favicon: logo_icon.ico
+  favicon: icon.ico
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
   highlightjsLang:
     - r

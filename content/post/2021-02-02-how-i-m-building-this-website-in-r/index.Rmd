@@ -5,6 +5,9 @@ date: '2021-02-02'
 slug: how-i-m-building-this-website-in-r
 categories: [Coding]
 tags: [blogdown, rmarkdown, C++]
+output:
+  blogdown::html_page:
+      toc: true
 ---
 
 It turns out building a static website in R is remarkably easy, as long as you know your way around R Markdown. Knowledge of HTML and CSS helps, but is not strictly necessary and can be acquired along the way. My package of choice for this website is `blogdown` by [Yihui Xie](https://yihui.org/) who has had a major impact on the R community through his many package contributions (`knitr`, `bookdown`, `pagedown`, ...) and certainly made my life a lot easier on many occasions. 

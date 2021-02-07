@@ -2,7 +2,6 @@
 title: "About"
 output: github_document
 date: "format(Sys.Date(), '%d %B, %Y')"
-disable_comments: true
 ---
 
 ```{r setup, include=FALSE}
@@ -20,10 +19,6 @@ To inspect the code that builds this website check out my [GitHub repository](ht
 - [LinkedIn](https://www.linkedin.com/in/patrick-altmeyer-a2a25494/)
 
 <hr>
-
-```{r, fig.align='center', fig.width=5, echo=FALSE, eval=FALSE}
-knitr::include_graphics("/www/avatar.jpg")
-```
 
 <div style="text-align:center">
   <img src="/www/avatar.jpg"  width="400px"/>
