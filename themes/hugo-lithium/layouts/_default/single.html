@@ -30,7 +30,9 @@
     </div>
   </article>
 
-  {{ partial "disqus.html" .}}
+  {{ if eq .Section "post" }}
+          {{ template "_internal/disqus.html" . }}
+  {{ end }}
 
 </main>
 

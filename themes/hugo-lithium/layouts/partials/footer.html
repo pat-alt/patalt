@@ -1,7 +1,4 @@
       <footer class="footer">
-        {{ if eq .Section "post" }}
-          {{ template "_internal/disqus.html" . }}
-        {{ end }}
         {{ with .Site.Params.footer }}
         <hr/>
         {{ . | markdownify }}
