@@ -4,7 +4,7 @@ title: Patrick Altmeyer
 theme: "hugo-lithium"
 publishDir: "pat-alt.github.io"
 googleAnalytics: ''
-disqusShortname: ''
+disqusShortname: 'patrickaltmeyer'
 ignoreFiles:
   - \.Rmd$
   - \.Rmarkdown$
