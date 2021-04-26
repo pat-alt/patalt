@@ -5,7 +5,7 @@ author: "Patrick Altmeyer"
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 output:
   blogdown::html_page:
-      toc: true
+      toc: false
 bibliography: ../../../bib.bib
 link-citations: true
 categories: [Data Science, Trustworth AI]
@@ -52,15 +52,15 @@ anim_save("www/toy.gif")
 
 <img src ="www/toy.gif" style="float:right; margin-left: auto; margin-right: auto; width:200px; height:200px;">
 
-In her popular book [Weapons of Math Destruction](https://en.wikipedia.org/wiki/Weapons_of_Math_Destruction) Cathy O'Neil presents the example of public school teacher Sarah Wysocki, who lost her job after a teacher evaluation algorithm had rendered her redundant [@o2016weapons]. Sarah was highly popular among her peers, supervisors and students. This post looks at a novel algorithmic solution to the problem that individuals like Sarah who are faced with an undesirable outcome should be provided with means to revise that outcome. The literature commonly refers to this as *individual recourse*. 
+In her popular book [Weapons of Math Destruction](https://en.wikipedia.org/wiki/Weapons_of_Math_Destruction) Cathy O'Neil presents the example of public school teacher Sarah Wysocki, who lost her job after a teacher evaluation algorithm had rendered her redundant [@o2016weapons]. Sarah was highly popular among her peers, supervisors and students. 
 
-One of the first approaches towards individual recourse was proposed by @ustun2019actionable.  In a recent follow-up paper, @joshi2019towards propose a methodology coined `REVISE`, which extends the earlier approach in at least three key ways:
+This post looks at a novel algorithmic solution to the problem that individuals like Sarah, who are faced with an undesirable outcome, should be provided with means to revise that outcome. The literature commonly refers to this as *individual recourse*. One of the first approaches towards individual recourse was proposed by @ustun2019actionable.  In a recent follow-up paper, @joshi2019towards propose a methodology coined `REVISE`, which extends the earlier approach in at least three key ways:
 
 1. `REVISE` provides a framework that avoids suggesting an unrealistic set of changes by imposing a threshold likelihood on the revised attributes.
 2. It is applicable to a broader class of models including Black Box classifiers and structural causal models.
 3. It can be used to detect poorly defined proxies and biases.
 
-For a detailed discussion of these points you may check out this [slide deck](paper_presentation.pdf) or consult the paper directly (freely available on [DeepAI](https://deepai.org/publication/towards-realistic-individual-recourse-and-actionable-explanations-in-black-box-decision-making-systems)). Here, we will abstract from some of these complications and instead look at an application of a slightly simplified version of `REVISE`. This should help you to first build a solid intuition. Readers interested in the technicalities and code may find all of this in the annex below. 
+For a detailed discussion of these points you may check out this [slide deck](paper_presentation.pdf) or consult the paper directly (freely available on [DeepAI](https://deepai.org/publication/towards-realistic-individual-recourse-and-actionable-explanations-in-black-box-decision-making-systems)). Here, we will abstract from some of these complications and instead look at an application of a slightly simplified version of `REVISE`. This should help us to first build a good intuition. Readers interested in the technicalities and code may find all of this in the annex below. 
 
 ## From `r emo::ji("cat")` to `r emo::ji("dog")`
 
@@ -83,7 +83,7 @@ averages = data.table(height=c(50,100),tail=c(50,20))
 invisible(list2env(sim_data(n=n,averages = averages),envir = environment()))
 ```
 
-We will explain `REVISE` through a short tale of cats and dogs. The protagonist of our story is Kitty `r emo::ji("cat")`, a young cat that identifies as a dog. Unfortunately though, she is not very tall and her tail, though short for a cat, is longer than that of the average dog (Figure \@ref(fig:density)).
+We will explain `REVISE` through a short tale of cats and dogs. The protagonist of this tale is Kitty `r emo::ji("cat")`, a young cat that identifies as a dog. Unfortunately, Kitty is not very tall and her tail, though short for a cat, is longer than that of the average dog (Figure \@ref(fig:density)).
 
 ```{r}
 set.seed(seed) # reproducibility
@@ -113,7 +113,7 @@ p <- ggplot(data=dt_plot, aes(x=value)) +
 p
 ```
 
-To her dismay, Kitty has been recognized as a cat by a linear classifier $g_n(X)$ that we trained through stochastic gradient descent (once again interested readers may find technical details and code in the annex below). Figure \@ref(fig:class) shows the resulting linear separation in the attribute space with the decision boundary in solid black and Kitty's location indicated through a red circle. Can we provide individual recourse for Kitty?
+Much to her dismay, Kitty has been recognized as a cat by a linear classifier $g_n(X)$ that we trained through stochastic gradient descent (once again interested readers may find technical details and code in the annex below). Figure \@ref(fig:class) shows the resulting linear separation in the attribute space with the decision boundary in solid black and Kitty's location indicated by a red circle. Can we provide individual recourse to Kitty?
 
 ```{r fit}
 source("R/linear_classifier.R")
@@ -122,7 +122,7 @@ mod <- linear_classifier(X,y,save_steps = T, n_iter = n_iter) # fit classifier
 y_hat <- predict(mod) # predict labels
 ```
 
-```{r class, fig.asp=1, fig.cap="Linear separation of cats and dogs in the 2-dimensional attribute space with the decision boundary of the fitted classifier in solid black. Kitty's location is indicated through the red circle."}
+```{r class, fig.asp=1, fig.cap="Linear separation of cats and dogs in the 2-dimensional attribute space with the decision boundary of the fitted classifier in solid black. Kitty's location is indicated by a red circle."}
 dt_plot <- data.table(y_hat = factor(y_hat), X)
 levels(dt_plot$y_hat) <- c("Cat", "Dog")
 dt_plot[,alpha:=1]
@@ -196,11 +196,11 @@ anim_save("www/revise.gif")
 
 Let's see if and how we can apply `REVISE` to Kitty's problem. The following summary should give you some flavour of how the algorithm works:
 
-1. Initialize $\mathbf{x}_i'^{(0)}$ - the attributes that will be revised recursively. Kitty's original attributes seem like a reasonable place to start.
+1. Initialize $\mathbf{x}_i'^{(0)}$, that is the attributes that will be revised recursively. Kitty's original attributes seem like a reasonable place to start.
 2. Through gradient descent recursively revise $\mathbf{x}_i'^{(t)}$ until $g_n(\mathbf{x}_i'^{(T)})=$`r emo::ji("dog")`. At this point $T$ the descent terminates since for these revised attributes the classifier labels Kitty as a dog.
-3. Return $\delta=\mathbf{x}_i'^{(0)}-\mathbf{x}_i$, that is the individual recourse for Kitty.
+3. Return $\delta_i=\mathbf{x}_i'^{(T)}-\mathbf{x}_i$, that is the individual recourse for Kitty.
 
-Figure \@ref(fig:revise) illustrates what happens when this approach is applied to Kitty's problem. The different panels show the results for different values of a regularization parameter $\lambda$, that governs the trade-off between achieving the desired label switch and keeping the distance between the original ($\mathbf{x}_i$) and revised ($\mathbf{x}_i'$) attributes small. In all but one case, `REVISE` converges: a decrease in tail length along with an increase in height eventually allows Kitty to cross the decision boundary. In other words, we have successfully turned Kitty into a dog - at least in the eyes of the linear classifier!
+Figure \@ref(fig:revise) illustrates what happens when this approach is applied to Kitty's problem. The different panels show the results for different values of a regularization parameter $\lambda$ that governs the trade-off between achieving the desired label switch and keeping the distance between the original ($\mathbf{x}_i$) and revised ($\mathbf{x}_i'$) attributes small. In all but one case, `REVISE` converges: a decrease in tail length along with an increase in height eventually allows Kitty to cross the decision boundary. In other words, we have successfully turned Kitty into a dog - at least in the eyes of the linear classifier!
 
 We also observe that as we increase $\lambda$ for a fixed learning rate, `REVISE` takes longer to converge. This should come as no surprise, since higher values of $\lambda$ lead to greater regularization with respect to the penalty we place on the distance that Kitty has to travel. When we penalize too much ($\lambda=10$), Kitty never reaches the decision boundary, because she is reluctant to change her characteristics beyond a certain point. While not visible to the naked eye, in this particular example $\lambda=0.001$ corresponds to the best choice among the candidate values.
 
@@ -215,14 +215,13 @@ kableExtra::kable(dt_dist, col.names = c("$\\lambda$","Euclidean distance"))
 
 ## Discussion
 
-While hopefully Kitty’s journey has provided you with some useful intuition, the story is of course very silly. Even if your cat ever seems to signal that she wants to be dog, helping her cross that decision boundary will be very tricky. Some attributes are simply immutable or very difficult to change, which Joshi et al. (2019) do not fail to account for in their approach. Their proposed methodology offers a simple and ingenious approach towards providing individual recourse. Instead of bothering with Black-Box interpretability, why not simply provide a quick remedy in case things go wrong?
+While hopefully Kitty’s journey has provided you with some useful intuition, the story is of course very silly. Even if your cat ever seems to signal that she wants to be dog, helping her cross that decision boundary will be tricky. Some attributes are simply immutable or very difficult to change, which @joshi2019towards do not fail to account for in their framework. Their proposed methodology offers a simple and ingenious approach towards providing individual recourse. Instead of concerning ourselves with Black Box interpretability, why not simply provide remedy in case things go wrong?
 
-That idea certainly has its merit. As this post has hopefully shown, `REVISE` is easily understood and readily applicable. It could be a very useful tool to provide individual recourse in many real-world applications. As the implementation of our simplified version of `REVISE` demonstrates, researchers should find it relatively easy to develop the methodology further and tailor it to specific use cases. The simpler version here, for example, may be useful in settings where the dimensionality is relatively small and one can reasonably model the distribution of attributes without the need for generative models.
+To some extent that idea has its merit. As this post has hopefully shown, `REVISE` is straight-forward to understand and readily applicable. It could be a very useful tool to provide individual recourse in many real-world applications. As the implementation of our simplified version of `REVISE` demonstrates, researchers should also find it relatively easy to develop the methodology further and tailor it to specific use cases. The simpler version here, for example, may be useful in settings where the dimensionality is relatively small and one can reasonably model the distribution of attributes without the need for generative models.
 
-Still, you may be wondering: if the original classifier is based on poorly defined rules and proxies, then what good does `REVISE` really do? Going back to the example of high-school teacher Sarah Wysocki, one of the key attributes determining teachers' evaluations was their students' performance. Realizing this, some teachers took the shortest route to success by artificially inflating their students' test scores. That same course of action may well have been suggested by `REVISE`. As a matter of fact, Joshi et al. (2019) show that this very property of `REVISE` may be useful in detecting weaknesses of decision making systems before setting them loose (key contribution 3).
+Still, you may be wondering: if the original classifier is based on poorly defined rules and proxies, then what good does `REVISE` really do? Going back to the example of high-school teacher Sarah Wysocki, one of the key attributes determining teachers' evaluations was their students' performance. Realizing this, some teachers took the shortest route to success by artificially inflating their students' test scores. That same course of action may well have been suggested by `REVISE`. As @joshi2019towards demonstrate, this very property of `REVISE` may actually proof useful in detecting weaknesses of decision making systems before setting them loose (key contribution 3).
 
-Nonetheless, the example of Sarah Wysocki demonstrates that approaches like `REVISE`, useful as they are, tend to provide solutions for very particular problems. In reality there are many such problems and research on trustworthy AI will therefore need to tackle the issue from various angles. A few places to start include the question of dealing with data that is inherently biased, improving ad-hoc and post-hoc model interpretability and continuing efforts around causality-inspired AI.
-
+Nonetheless, the example above also demonstrates that approaches like `REVISE`, useful as they may be, tend to provide solutions for very particular problems. In reality data-driven decision making systems are often subject to many different problems and hence research on trustworthy AI will need to tackle the issue from various angles. A few places to start include the question of dealing with data that is inherently biased, improving ad-hoc and post-hoc model interpretability and continuing efforts around causality-inspired AI.
 
 ## References
 
@@ -230,15 +229,37 @@ Nonetheless, the example of Sarah Wysocki demonstrates that approaches like `REV
 
 ## Annex 
 
-In my blog posts I aim to implement interesting ideas from scratch even if that usually means that things need to undergo some sort of simplification. The benefit of this approach is that experience is educationally very rewarding - both for myself and hopefully my readers. The two sections of this annex show how `REVISE` and linear classification can be implemented in R. 
+In my blog posts I aim to implement interesting ideas from scratch even if that sometimes means that things need to undergo some sort of simplification. The benefit of this approach is that the experience is educationally rewarding - both for myself and hopefully also for readers. The first two sections of this annex show how `REVISE` and linear classification can be implemented in R. The final section just shows how the synthetic data was generated. To also inspect the code that generates the visualizations and everything else, you can find the source code of this file on [GitHub](https://github.com/pat-alt/patalt/blob/master/content/post/2021-04-26-individual-recourse-for-black-box-models/index.Rmd).
+
+### Linear classifier
+
+Linear classification is implemented through stochastic gradient descent (SGD) with Hinge loss
+
+$$
+\begin{aligned}
+&& \ell(-\mathbf{w}^T\mathbf{x}_i y_i)&=(1-\mathbf{w}^T\mathbf{x}_i y_i)_+ \\
+\end{aligned}
+$$
+
+where $\mathbf{w}$ is a coefficient vector, $\mathbf{x}_i$ is the attribute vector of individual $i$ and $y_i$ is the individual's outcome. Since we apply SGD in order to minimize the loss function $\ell$ by varying $\mathbf{w}$, we need an expression for its gradient with respect to $\mathbf{w}$, which is given by:
+
+\begin{equation} 
+\begin{aligned}
+&& \nabla_{\mathbf{W}} \left( \ell(-\mathbf{w}^T\mathbf{x}_i y_i) \right) &= \begin{cases} -\mathbf{x}_i y_i & \text{if} \ \ \ \mathbf{w}^T\mathbf{x}_i y_i \le 1\\ 0 & \text{otherwise} \end{cases} \\
+\end{aligned}
+(\#eq:hinge)
+\end{equation}
+
+The code below uses this analytical solution to perform SGD over $T$ iterations or as long as updates yield feasible parameter values. As the final vector of coefficients the function returns $\mathbf{\bar{w}}= \frac{1}{T} \sum_{t=1}^{T} \mathbf{w}_t$. Denoting the optimal coefficient vector as $\mathbf{w}^*$, it can be shown that under certain conditions $\ell(\mathbf{\bar{w}})\rightarrow\ell(\mathbf{w}^*)$ as $T\rightarrow\infty$.
+
+```{r, code=readLines("R/linear_classifier.R"), eval=FALSE, echo=TRUE}
+```
 
 ### `REVISE` (simplified)
 
-As flagged above, we use a slightly simplified version of algorithm presented in @joshi2019towards. In particular, we do not incorporate the threshold on the likelihood, which the authors implement through generative models. We will also pretend here that all attributes are mutable. 
+As flagged above, we are looking at a slightly simplified version of the algorithm presented in @joshi2019towards. In particular, the approach here does not incorporate the threshold on the likelihood nor does it account for immutable attributes.
 
-Let $y\in\{-1,1\}$ be a binary outcome variable, $X\in\mathbb{R}^d$ a feature matrix containing individuals' attributes and $g_n(X)$ a corresponding data-dependent classifier. Suppose $y_i=-1$ - the negative outcome - for some individual characterized by attributes $\mathbf{x}_i$. Then we want to find $\mathbf{x}_i'$ closest to $\mathbf{x}_i$ such that the classifier assigns the positive outcome (primary constraint) and the likelihood of the sample $p(\mathbf{x}_i')$ exceeds some threshold $\gamma$ (secondary constraint).
-
-In order to identify the smallest set of changes $\delta_i=\mathbf{x}_i^{'}-\mathbf{x}_i$ necessary for individual $i$ to achieve a label switch from $g(\mathbf{x}_i^{'})=1$, we use gradient descent with Hinge loss $\ell$ to minimize the following function 
+Let $y\in\{-1,1\}$ be a binary outcome variable, $X\in\mathbb{R}^d$ a feature matrix containing individuals' attributes and $g_n(X)$ a corresponding data-dependent classifier. Suppose $y_i=-1$ (the negative outcome) for some individual characterized by attributes $\mathbf{x}_i$. Then we want to find $\mathbf{x}_i'$ closest to $\mathbf{x}_i$ such that the classifier assigns the positive outcome $g(\mathbf{x}_i^{'})=1$. In order to do so, we use gradient descent with Hinge loss $\ell$ to minimize the following function 
 
 $$
 \begin{aligned}
@@ -267,26 +288,23 @@ The code that implements this optimization follows below.
 ```{r, code=readLines("R/revise.R"), eval=FALSE, echo=TRUE}
 ```
 
-### Linear classifier
+### Simulated data
 
-Linear classification is implemented through stochastic gradient descent (SGD) under Hinge loss
+The synthetic data describing cats and dogs was generated as follows:
 
-$$
-\begin{aligned}
-&& \ell(-\mathbf{w}^T\mathbf{x}_i y_i)&=(1-\mathbf{w}^T\mathbf{x}_i y_i)_+ \\
-\end{aligned}
-$$
-
-where $\mathbf{w}$ is a coefficient vector, $\mathbf{x}_i$ is the attribute vector of individual $i$ and $y_i$ is individual's outcome. Since we apply SGD in order to minimize the loss function $\ell$ by varying $\mathbf{w}$, we need an expression for its gradient with respect to $\mathbf{w}$:
-
-\begin{equation} 
-\begin{aligned}
-&& \nabla_{\mathbf{W}} \left( \ell(-\mathbf{w}^T\mathbf{x}_i y_i) \right) &= \begin{cases} -\mathbf{x}_i y_i & \text{if} \ \ \ \mathbf{w}^T\mathbf{x}_i y_i \le 1\\ 0 & \text{otherwise} \end{cases} \\
-\end{aligned}
-(\#eq:hinge)
-\end{equation}
-
-The code below uses this analytical solution to perform SGD over $T$ iterations or as long as updates yield feasible parameter values. As the final vector of coefficients the function returns $\mathbf{\bar{w}}= \frac{1}{T} \sum_{t=1}^{T} \mathbf{w}_t$. Denoting the optimal coefficient vector as $\mathbf{w}^*$, it can be shown that under certain conditions $\ell(\mathbf{\bar{w}})\rightarrow\ell(\mathbf{w}^*)$ as $T\rightarrow\infty$.
-
-```{r, code=readLines("R/linear_classifier.R"), eval=FALSE, echo=TRUE}
+```{r, eval=FALSE, echo=TRUE}
+sim_data <- function(n=100,averages,noise=0.1) {
+  d <- ncol(averages)
+  y <- 2*(rbinom(n,1,0.5)-0.5) # generate binary outcome: 1=dog, -1=cat
+  X <- as.matrix(averages[(y+1)/2+1,]) # generate attributes conditional on y
+  dogs <- y==1 # boolean index for dogs
+  cats <- y==-1 # boolean index for cats
+  X[cats,] <- X[cats,] + 
+    matrix(rnorm(sum(cats)*d),nrow=sum(cats)) %*% diag(noise*averages[2,]) # add noise for y=1 (cats)
+  X[dogs,] <- X[dogs,] + 
+    matrix(rnorm(sum(dogs)*d),nrow=sum(dogs)) %*% diag(noise*averages[2,]) # add noise for y=1 (dogs)
+  return(list(X=X,y=y))
+}
 ```
+
+
