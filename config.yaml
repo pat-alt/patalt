@@ -36,7 +36,7 @@ params:
   MathJaxVersion: 2.7.5
   description: A collection of ideas, notes and code.
   menu_item_separator: "-"
-  favicon: icon.ico
+  favicon: static/www/icon.ico
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
   highlightjsLang:
     - r

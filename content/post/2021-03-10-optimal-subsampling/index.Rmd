@@ -18,7 +18,7 @@ library(fromScratchR)
 
 # Optimal subsampling
 
-When working with very large sample data, even the estimation of ordinary least-squares can be computationally prohibitive. Since we increasingly find ourselves in situations where the sample size $n$ is extremely high, a body of literature concerned with optimal subsampling has recently emerged. This post summarises some of the main ideas and methodologies that have emerged from that literature. The psot is structured as follows: to set the stage for the remainder of the analysis the first section briefly introduces the bias-variance trade-off. The following section then introduces various subsampling methods. Finally, we will looks at a small empirical exercise that illustrates the improvements associated with non-uniform subsampling. 
+When working with very large sample data, even the estimation of ordinary least-squares can be computationally prohibitive. Since we increasingly find ourselves in situations where the sample size $n$ is extremely high, a body of literature concerned with optimal subsampling has recently emerged. This post summarises some of the main ideas and methodologies that have emerged from that literature. The post is structured as follows: to set the stage for the remainder of the analysis the first section briefly introduces the bias-variance trade-off. The following section then introduces various subsampling methods. Finally, we will looks at a small empirical exercise that illustrates the improvements associated with non-uniform subsampling. 
 
 ## Bias-variance tradeoff
 
