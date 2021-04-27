@@ -113,7 +113,7 @@ p <- ggplot(data=dt_plot, aes(x=value)) +
 p
 ```
 
-Much to her dismay, Kitty has been recognized as a cat by a linear classifier $g_n(X)$ that we trained through stochastic gradient descent (once again interested readers may find technical details and code in the annex below). Figure \@ref(fig:class) shows the resulting linear separation in the attribute space with the decision boundary in solid black and Kitty's location indicated by a red circle. Can we provide individual recourse to Kitty?
+Much to her dismay, Kitty has been recognized as a cat by a linear classifier $g_n(X)$ that we trained through stochastic gradient descent using the data on animals' height and tail length. Once again interested readers may find technical details and code in the annex below. Figure \@ref(fig:class) shows the resulting linear separation in the attribute space with the decision boundary in solid black and Kitty's location indicated by a red circle. Can we provide individual recourse to Kitty?
 
 ```{r fit}
 source("R/linear_classifier.R")
@@ -215,7 +215,7 @@ kableExtra::kable(dt_dist, col.names = c("$\\lambda$","Euclidean distance"))
 
 ## Discussion
 
-While hopefully Kitty’s journey has provided you with some useful intuition, the story is of course very silly. Even if your cat ever seems to signal that she wants to be dog, helping her cross that decision boundary will be tricky. Some attributes are simply immutable or very difficult to change, which @joshi2019towards do not fail to account for in their framework. Their proposed methodology offers a simple and ingenious approach towards providing individual recourse. Instead of concerning ourselves with Black Box interpretability, why not simply provide remedy in case things go wrong?
+While hopefully Kitty’s journey has provided you with some useful intuition, the story is of course very silly. Even if your cat ever seems to signal that she wants to be a dog, helping her cross that decision boundary will be tricky. Some attributes are simply immutable or very difficult to change, which @joshi2019towards do not fail to account for in their framework. Their proposed methodology offers a simple and ingenious approach towards providing individual recourse. Instead of concerning ourselves with Black Box interpretability, why not simply provide remedy in case things go wrong?
 
 To some extent that idea has its merit. As this post has hopefully shown, `REVISE` is straight-forward to understand and readily applicable. It could be a very useful tool to provide individual recourse in many real-world applications. As the implementation of our simplified version of `REVISE` demonstrates, researchers should also find it relatively easy to develop the methodology further and tailor it to specific use cases. The simpler version here, for example, may be useful in settings where the dimensionality is relatively small and one can reasonably model the distribution of attributes without the need for generative models.
 
