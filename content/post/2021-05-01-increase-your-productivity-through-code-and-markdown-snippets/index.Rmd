@@ -1,0 +1,13 @@
+---
+title: Increase your productivity through code and markdown snippets
+author: Patrick Altmeyer
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+slug: increase-your-productivity-through-code-and-markdown-snippets
+categories: [Coding, Productivitiy]
+tags: [blogdown, rmarkdown, snippets]
+output:
+  blogdown::html_page:
+      toc: false
+---
+
+

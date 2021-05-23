@@ -1,0 +1,8 @@
+---
+title: "Deep VARs"
+author: Patrick Altmeyer
+date: "`r Sys.Date()`"
+output: github_document
+---
+
+[Upcoming]
